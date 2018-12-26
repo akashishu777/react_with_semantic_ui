@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { Divider, Form, Button, Icon } from 'semantic-ui-react'
-import {FixedMenuLayout} from './nav'
+// import {FixedMenuLayout} from './nav'
 
 export class MyComponent extends React.Component{
 

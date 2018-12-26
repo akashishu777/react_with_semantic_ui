@@ -2,8 +2,8 @@ import 'semantic-ui-css/semantic.min.css';
 
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
-import { Divider, Form, Label } from 'semantic-ui-react'
-
+import { Divider, Form, Button, Icon } from 'semantic-ui-react'
+import {FixedMenuLayout} from './nav'
 
 export class MyComponent extends React.Component{
 
@@ -19,7 +19,9 @@ export class MyComponent extends React.Component{
                 "Place" : ["DELHI","MUMBAI"]
               },   
 
-            pop:[]
+            pop:[],
+            name: '',
+            shareholders: [{ name: '' }]
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -52,9 +54,35 @@ export class MyComponent extends React.Component{
         
     }
 
+    handleShareholderNameChange = (idx) => (evt) => {
+        const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
+          if (idx !== sidx) return shareholder;
+          return { ...shareholder, name: evt.target.value };
+        });
+    
+        this.setState({ shareholders: newShareholders });
+      }
+    
+      handleSubmit = (evt) => {
+        const { name, shareholders } = this.state;
+        alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+      }
+    
+      handleAddShareholder = () => {
+        this.setState({
+          shareholders: this.state.shareholders.concat([{ name: '' }])
+        });
+      }
+    
+      handleRemoveShareholder = (idx) => () => {
+        this.setState({
+          shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx)
+        });
+      }
+
     render() {
        return <div style={{padding:"200px"}}>
-                <Form>
+                {/* <Form>
           <Form.Field>
             <input type='text' placeholder='First name' />
             <Label pointing>Please enter a value</Label>
@@ -77,8 +105,8 @@ export class MyComponent extends React.Component{
             <Label pointing='right'>Your password must be 6 characters or more</Label>
             <input type='password' placeholder='Password' />
           </Form.Field>
-        </Form>
-        <Divider />
+        </Form> */}
+        {/* <Divider />
         <Form.Field inline>
                 <Dropdown
                     options={this.state.data}
@@ -92,7 +120,35 @@ export class MyComponent extends React.Component{
                     placeholder='Select'
                     selection
                 />     
-       </Form.Field>       
+       </Form.Field>        */}
+
+        <form onSubmit={this.handleSubmit}>
+        {/* ... */}
+        <h4>Experience</h4>
+
+        {this.state.shareholders.map((shareholder, idx) => (
+                    <div className="shareholder">
+                     <Divider />
+                    <Form.Field inline>
+                            <Dropdown
+                                options={this.state.data}
+                                placeholder='Select'
+                                onChange={this.handleChange}
+                                selection
+                            />             
+                                <Dropdown
+                                style={{marginLeft:"20px"}}
+                                options={this.state.pop}
+                                placeholder='Select'
+                                selection
+                            />     
+                            <Icon style={{marginLeft:"10px"}} onClick={this.handleRemoveShareholder(idx)} link name='close' /> 
+                </Form.Field>     
+                
+                    </div>
+        ))}
+        <Button style={{marginTop:"10px"}} type="button" onClick={this.handleAddShareholder} positive>Add Experience</Button>
+      </form>   
               </div>
        }
  }

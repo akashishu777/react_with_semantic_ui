@@ -19,6 +19,7 @@
     "semantic-ui-react": "^0.82.2"
   },
   "devDependencies": {
+    "gh-pages": "^2.0.0",
     "react-scripts": "^1.1.4"
   },
   "homepage": "http:akashishu777.github.io/react_with_semantic_ui"

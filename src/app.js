@@ -14,7 +14,7 @@ export class MyComponent extends React.Component{
             data: [ { key: 'Game', value: 'Game', text: 'Game' }, { key: 'Place', value: 'Place', text: 'Place' }, { key: 'Month', value: 'Month', text: 'Month' }],
 
             category:{
-                "Game" : ["GTA","NINJA"],
+                "Game" : ["GTA","PUBG"],
                 "Month" : ["JAN","FEB"],
                 "Place" : ["DELHI","MUMBAI"]
               },   
